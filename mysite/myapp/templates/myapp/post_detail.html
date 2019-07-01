@@ -1,0 +1,27 @@
+
+<!--  everthing can be done using the use of dictionary -->
+{% extends "myapp/base.html" %}
+{% block content %}
+
+      <!-- now instead of post as the object it will send the object as the name so we will basically replace post with the object
+      -->
+
+      <article class="media content-section">
+          <!-- adding the image of the user who writes the post -->
+          <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ object.author }}</a>
+                 <!-- this is simply displaying the data as it is stored into the database
+                 <small class="text-muted">{{ post.date_posted }}</small>
+                 -->
+                 <!-- now to format the date accordingly we have to use
+                        the filters -->
+                <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            <p class="article-content">{{ object.content }}</p>
+          </div>
+      </article>
+{% endblock content %}

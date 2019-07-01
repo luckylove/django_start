@@ -1,0 +1,40 @@
+{% extends "myapp/base.html" %}
+<!-- load crispy forms -->
+{% load crispy_forms_tags %}
+{% block content %}
+        <!-- no need to make the template in the same
+             directory you can inharit the template of the
+             other app as well without any problems encountering here
+             -->
+       <div class="content-section">
+            <form method="POST" >
+               <!-- cs or f token hidded token -->
+                <!--  cross site forgery token used for security purpose-->
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <!-- we need to just provide the legend just for the information
+                         since we are using the already present form so
+                          we only need to give here that form variable
+                          that is being send by the view.py file
+                          -->
+                    <legend class="border-bottom mb-4">Login </legend>
+                   <!--  {{form.as_p}}   -->
+                    <!-- now i need to use crispy so forms.as-p is not needed -->
+                    {{ form|crispy }}
+                    <!-- {{form}}  this is basically for simpler implementation
+                          if we want that our our form looks a little nice
+                           we just need to use .as_p that will display the form in the
+                           form of paragraph -->
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Login</button>
+                </div>
+            </form>
+           <!-- if you already sign in then login link -->
+           <div class="border-top pt-3">
+               <small class="text-muted">
+                   Need an Account ? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
+               </small>
+           </div>
+       </div>
+{% endblock content %}
